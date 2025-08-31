@@ -1,109 +1,208 @@
-# Decentralized Poker Game
+# Data Marketplaces
 
-A fully on-chain, trustless poker game built on Ethereum where players can engage in poker matches without relying on any central authority or trusting other players. The game leverages blockchain technology to ensure transparency, security, and provable fairness in every hand.
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/apna-counsellors-projects/v0-data-marketplaces)
+[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app/chat/projects/GmO9KwHHcMY)
 
-## 🎮 Features
+## 1) Project Title
+Data Marketplaces – Datasets, Compute-on-Data, and Research Marketplace (Supabase + Vercel Blob, optional Web3)
 
-- **Fully On-Chain Gameplay**: Every action, from card dealing to betting, happens on the blockchain
-- **Trustless System**: No need to trust other players or a central server—everything is verifiable
-- **Smart Contract-Based Rules**: Game logic is enforced through immutable smart contracts
-- **Secure Card Dealing**: Innovative cryptographic system for secure and verifiable card dealing
-- **Real-time Updates**: Flutter-based UI with real-time game state updates
-- **Fair Gaming**: Provably fair gameplay with all actions recorded on the blockchain
+## 2) Description
+Data Marketplaces is a modern, mobile-first platform for discovering, publishing, and monetizing datasets, and for running compute on data securely. It provides:
+- A datasets layer (files stored in Vercel Blob, metadata in Supabase)
+- A compute jobs layer (create jobs against datasets, track statuses)
+- A research marketplace (publish offers, request access)
+- Optional Web3 access controls (wallet connect, NFT-gated access, purchase stubs)
 
-## Demo & Pitch
+Built with Next.js (App Router), Tailwind (shadcn/ui), Supabase (DB + auth + RLS), and Vercel Blob for storage. The app ships with versioned SQL migrations, REST APIs, and responsive pages.
 
-Our pitch deck, which includes a demo video, can be accessed [here](https://www.canva.com/design/DAGegjaThjU/_942RLOhgNFEFAwQYnpMUQ/view?utm_content=DAGegjaThjU&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h4529bb1b1a).
+## 3) Features
+- Datasets
+  - Upload files to Vercel Blob; store metadata in Supabase
+  - Browse datasets (list/detail), associate datasets to DAOs (groups)
+- DAOs (Data Cooperatives)
+  - Create organizations/groups and attach datasets
+- Compute-on-Data Jobs
+  - Create jobs referencing a dataset; track status and results (stubbed runner)
+- Research Marketplace
+  - Publish offers; view offers; stubbed checkout flow
+- Authentication & Security
+  - Supabase email/password auth, SSR session refresh middleware
+  - RLS: public reads; writes require auth (and/or service role in API)
+- APIs
+  - REST endpoints for datasets, compute jobs, marketplace offers, DAO relations
+- Optional Web3
+  - Wallet Connect (injected) and minimal contract interfaces
+  - Access gating and purchase stubs (Sepolia-ready)
+- UI/UX
+  - Mobile-first, accessible, shadcn/ui components, Tailwind v4 tokens
 
-## 🏗 Architecture
-
-The project consists of two main components:
-
-1. **Smart Contracts** (`/contracts`)
-   - Written in Solidity
-   - Handles game logic, card dealing, and betting
-   - Manages player states and game progression
-   - Implements cryptographic card dealing system
-
-2. **Flutter Frontend** (`/poker_dapp`)
-   - Modern, responsive UI
-   - Real-time game state updates
-   - Web3 wallet integration
-   - Interactive betting interface
-
-## 🎲 Game Flow
-
-1. **Game Creation**: Any player can create a new game
-2. **Joining**: Second player joins with matching buy-in
-3. **Card Dealing**: First player encrypts and submits deck
-4. **Card Selection**: Second player selects and verifies cards
-5. **Betting Rounds**: Players participate in betting rounds
-6. **Card Revelation**: Community cards revealed through decryption
-7. **Showdown**: Winner determined and pot distributed
-
-## 🔧 Technical Implementation
-
-- **Card Dealing Security**: Uses a combination of encryption and commitment schemes
-- **State Management**: Handles complex game states through smart contract events
-- **Betting System**: Implements standard poker betting rules on-chain
-- **Decryption Process**: Two-phase decryption for secure card revelation
-
-## 🚀 Getting Started
+## 4) Installation Instructions
 
 ### Prerequisites
-- Node.js and npm
-- Flutter SDK
-- Hardhat
-- MetaMask or similar Web3 wallet
+- Node.js 18+ (or 20+), and one of:
+  - bun (recommended): https://bun.sh
+  - or pnpm / npm
+- Vercel account (recommended for deployment)
+- Supabase project (use Vercel Integration or set env vars manually)
+- Vercel Blob (enabled via integration or `BLOB_READ_WRITE_TOKEN`)
 
-### Installation
+### 1. Clone
+\`\`\`bash
+git clone https://github.com/<your-org-or-user>/Data-Marketplaces.git
+cd Data-Marketplaces
+\`\`\`
 
-1. Clone the repository:
-```bash
-git clone [repository-url]
-```
+### 2. Install dependencies
+\`\`\`bash
+# using bun
+bun install
 
-2. Install smart contract dependencies:
-```bash
+# or using pnpm
+pnpm install
+
+# or npm
 npm install
-```
+\`\`\`
 
-3. Install Flutter dependencies:
-```bash
-cd poker_dapp
-flutter pub get
-```
+### 3. Environment variables
+Create `.env.local` (for local dev) and set:
 
-4. Start local blockchain:
-```bash
-npx hardhat node
-```
+Supabase (required):
+\`\`\`
+# Server-side
+SUPABASE_URL=
+SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
 
-5. Deploy contracts:
-```bash
-npx hardhat run scripts/deploy.js --network localhost
-```
+# Client-side (NEXT_PUBLIC_*)
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+\`\`\`
 
-6. Run the Flutter app:
-```bash
-cd poker_dapp
-flutter run -d chrome
-```
+Vercel Blob (required for upload):
+\`\`\`
+BLOB_READ_WRITE_TOKEN=
+\`\`\`
 
-## 🤝 Contributing
+Optional Web3:
+\`\`\`
+# Defaults to Sepolia if omitted
+NEXT_PUBLIC_CHAIN_ID=11155111
+NEXT_PUBLIC_RPC_URL=https://rpc.sepolia.org
+# Set addresses to enable on-chain actions
+NEXT_PUBLIC_ACCESS_NFT_ADDRESS=
+NEXT_PUBLIC_MARKETPLACE_ADDRESS=
+\`\`\`
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+### 4. Database setup (SQL migrations)
+Run these in order (via Supabase SQL editor or your preferred migration runner):
+\`\`\`
+scripts/001_init_datasets.sql
+scripts/002_init_daos.sql
+scripts/003_init_compute_jobs.sql
+scripts/004_init_marketplace.sql
+\`\`\`
+These create tables and RLS policies (public reads; writes require auth or service role in server APIs).
 
-## 📄 License
+### 5. Run the app
+\`\`\`bash
+# Development
+bun dev        # or pnpm dev / npm run dev
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+# Build + start (production)
+bun run build
+bun run start  # or pnpm build && pnpm start
+\`\`\`
 
-## 🔗 Links
+## 5) Usage
 
-- [Documentation](docs/)
-- [Smart Contracts](contracts/)
-- [Frontend App](poker_dapp/)
+### UI Routes
+- Home: `/`
+- Datasets: `/datasets`
+- Dataset Detail: `/datasets/[id]`
+- DAOs: `/daos`
+- Submit Dataset: `/submit`
+- Compute Jobs: `/compute-jobs`
+- Marketplace: `/marketplace`
+- Auth: `/login`, `/register`
+- Redirect: `/compute` → `/compute-jobs` (fallback)
 
-## 🙏 Acknowledgments
+Note: Write actions require you to be signed in.
 
-Built during ETHOxford Hackathon 2024
+### API Endpoints (examples)
+
+List datasets:
+\`\`\`bash
+curl -s https://<your-deployment>/api/datasets
+\`\`\`
+
+Create dataset (multipart/form-data):
+\`\`\`bash
+curl -X POST https://<your-deployment>/api/datasets \
+  -H "Authorization: Bearer <your-supabase-jwt>" \
+  -F "file=@/path/to/file.csv" \
+  -F "name=Human Activity Data" \
+  -F "description=Wearables accelerometer dataset"
+\`\`\`
+
+Get dataset by id:
+\`\`\`bash
+curl -s https://<your-deployment>/api/datasets/<id>
+\`\`\`
+
+Create compute job:
+\`\`\`bash
+curl -X POST https://<your-deployment>/api/compute-jobs \
+  -H "Authorization: Bearer <your-supabase-jwt>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "dataset_id": "<dataset-id>",
+    "parameters": {"task":"summary","model":"stub-gpu"}
+  }'
+\`\`\`
+
+List marketplace offers:
+\`\`\`bash
+curl -s https://<your-deployment>/api/marketplace/offers
+\`\`\`
+
+Stub checkout:
+\`\`\`bash
+curl -X POST https://<your-deployment>/api/marketplace/checkout \
+  -H "Authorization: Bearer <your-supabase-jwt>" \
+  -H "Content-Type: application/json" \
+  -d '{"offer_id":"<offer-id>"}'
+\`\`\`
+
+### Authentication (Supabase)
+- Register: `/register` (email + password)
+- Login: `/login`
+- SSR session refresh handled by middleware; authenticated requests include the Supabase JWT on the client.
+- RLS ensures reads are safe; write endpoints validate auth server-side.
+
+### Optional Web3
+- Use the “Connect Wallet” button in the header (injected connector, e.g., MetaMask).
+- If `NEXT_PUBLIC_ACCESS_NFT_ADDRESS` is set, AccessCheck will gate dataset content.
+- If `NEXT_PUBLIC_MARKETPLACE_ADDRESS` is set, the Purchase button performs client-side on-chain calls (Sepolia by default).
+
+## 6) Contributing
+We welcome contributions!
+
+- Discuss: open a GitHub Issue to propose features or report bugs.
+- Branching: create feature branches from `main`.
+- Commits: use clear, descriptive messages (Conventional Commits appreciated).
+- PRs: include a summary, screenshots (if UI), and testing notes.
+- Code style: follow existing patterns (Next.js App Router, shadcn/ui, Tailwind). Keep pages mobile-first and accessible.
+- Security: never commit secrets; use env vars. Data writes must enforce auth and respect RLS.
+
+## 7) License
+MIT License. See `LICENSE` (add if not present).
+
+## 8) Contact Information
+- Project: https://vercel.com/apna-counsellors-projects/v0-data-marketplaces
+- v0 Project: https://v0.app/chat/projects/GmO9KwHHcMY
+- Issues: Open a GitHub Issue in this repository
+- Maintainers: Please use Issues for support; for Vercel-specific help, open a ticket at https://vercel.com/help
+
+---
+Built with Next.js, Supabase, Vercel Blob, shadcn/ui, and optional wagmi + viem for Web3.

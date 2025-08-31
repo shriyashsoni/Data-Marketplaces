@@ -1,3 +1,6 @@
+
+<img width="1886" height="158" alt="Screenshot 2025-08-31 185611" src="https://github.com/user-attachments/assets/0dc1de17-3389-431c-9d21-5fd0332a73a3" />
+
 # Data Marketplaces
 
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/apna-counsellors-projects/v0-data-marketplaces)

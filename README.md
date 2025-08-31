@@ -198,11 +198,5 @@ We welcome contributions!
 ## 7) License
 MIT License. See `LICENSE` (add if not present).
 
-## 8) Contact Information
-- Project: https://vercel.com/apna-counsellors-projects/v0-data-marketplaces
-- v0 Project: https://v0.app/chat/projects/GmO9KwHHcMY
-- Issues: Open a GitHub Issue in this repository
-- Maintainers: Please use Issues for support; for Vercel-specific help, open a ticket at https://vercel.com/help
-
 ---
 Built with Next.js, Supabase, Vercel Blob, shadcn/ui, and optional wagmi + viem for Web3.
